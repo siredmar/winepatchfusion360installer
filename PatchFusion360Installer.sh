@@ -2,11 +2,20 @@
 # This script downloads the Fusion360 Installer and patches it to be able to install it with wine
 # Armin Schlegel <armin.schlegel@gmx.de>, 06.03.2019
 
-mkdir -p /tmp/fusion360/ | true
-TEMP=$(mktemp -d -p /tmp/fusion360/)
-TEMP_PYTHON=$(mktemp -d -p /tmp/fusion360/)
-chmod 755 $TEMP_PYTHON
-chmod 755 $TEMP
+
+if [ "$1" ]
+then
+    TEMP_PATH=$(pwd)"/"
+    TEMP_PATH+=$1
+fi
+TEMP_PATH+="/tmp/fusion360/"
+
+mkdir -p $TEMP_PATH | true
+cd $TEMP_PATH
+TEMP=$(mktemp -d -p $TEMP_PATH)
+TEMP_PYTHON=$(mktemp -d -p $TEMP_PATH)
+chmod -R 755 $TEMP_PYTHON
+chmod -R 755 $TEMP
 
 if [ -z "$(which uncompyle6)" ]
 then
@@ -33,11 +42,13 @@ fi
 
 # downloading and extracting the installer
 cd $TEMP
+
 wget "https://dl.appstreaming.autodesk.com/production/installers/Fusion%20360%20Client%20Downloader.exe"
 echo Extracting file Fusion 360 Client Downloader.exe
 7z x "Fusion 360 Client Downloader.exe" > /dev/null 2>&1
 
 # extracting python35.zip to gain access to platform.pyc
+echo $TEMP_PYTHON
 cd $TEMP_PYTHON
 unzip $TEMP/python35.zip > /dev/null 2>&1
 
