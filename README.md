@@ -1,21 +1,27 @@
 # winepatchfusion360installer
 Contains a script that makes the Fusion 360 installer install in Linux using wine
-
-Note: This file patches only the installer. None of the application itself is being altered with. 
+This is based on the information from: https://appdb.winehq.org/objectManager.php?sClass=version&iId=36468&iTestingId=104527
 
 The script downloads the installer and patches the platform.py file.
+Note: This file patches only the installer. None of the application itself is being altered with. 
 
 **Preparations:**
+Install 64 Bit Version of Wine. I tested it with Wine 4.3.
 
 Set machine as Windows 7 or newer (tested only with Win7):
-$ winetricks win7
+```$ winetricks win7
+```
 
 Install vcrun2017 and then reset the Windows release, because winetricks sets it as Windows XP:
+```
 $ winetricks vcrun2017
 $ winetricks win7
+```
 
 Disable the d3d11 library completely:
+```
 $ winetricks d3d11=disabled
+```
 
 **Uage:**
 Setup your wineprefix
