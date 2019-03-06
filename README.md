@@ -9,7 +9,8 @@ Note: This file patches only the installer. None of the application itself is be
 Install 64 Bit Version of Wine. I tested it with Wine 4.3.
 
 Set machine as Windows 7 or newer (tested only with Win7):
-```$ winetricks win7
+```
+$ winetricks win7
 ```
 
 Install vcrun2017 and then reset the Windows release, because winetricks sets it as Windows XP:
