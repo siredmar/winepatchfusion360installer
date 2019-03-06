@@ -3,7 +3,7 @@
 # Armin Schlegel <armin.schlegel@gmx.de>, 06.03.2019
 
 mkdir -p /tmp/fusion360/ | true
-TEMP=$(mktemp -d -p ~/tmp/fusion360/)
+TEMP=$(mktemp -d -p /tmp/fusion360/)
 TEMP_PYTHON=$(mktemp -d -p /tmp/fusion360/)
 chmod 755 $TEMP_PYTHON
 chmod 755 $TEMP
