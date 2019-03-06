@@ -29,7 +29,7 @@ $ winetricks d3d11=disabled
 Just run the script.
 
 ```
-$ git clone https://github.com/siredmar/winepatchfusion360installer
+$ git clone https://github.com/siredmar/winepatchfusion360installer.git
 $ cd winepatchfusion360installer
 $ ./PatchFusion360Installer.sh
 --2019-03-06 08:07:23--  https://dl.appstreaming.autodesk.com/production/installers/Fusion%20360%20Client%20Downloader.exe
