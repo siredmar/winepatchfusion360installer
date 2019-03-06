@@ -25,8 +25,9 @@ $ winetricks d3d11=disabled
 ```
 
 **Uage:**
-Setup your wineprefix
-Just run the script 
+
+Just run the script.
+
 ```
 $ git clone https://github.com/siredmar/winepatchfusion360installer
 $ cd winepatchfusion360installer
