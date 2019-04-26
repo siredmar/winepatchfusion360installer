@@ -9,13 +9,12 @@ then
     TEMP_PATH+=$1
 fi
 TEMP_PATH+="/tmp/fusion360/"
-
-mkdir -p $TEMP_PATH | true
-cd $TEMP_PATH
-TEMP=$(mktemp -d -p $TEMP_PATH)
-TEMP_PYTHON=$(mktemp -d -p $TEMP_PATH)
-chmod -R 755 $TEMP_PYTHON
-chmod -R 755 $TEMP
+mkdir -p "$TEMP_PATH" | true
+cd "$TEMP_PATH"
+TEMP=$(mktemp -d -p "$TEMP_PATH")
+TEMP_PYTHON=$(mktemp -d -p "$TEMP_PATH")
+chmod -R 755 "$TEMP_PYTHON"
+chmod -R 755 "$TEMP"
 
 if [ -z "$(which uncompyle6)" ]
 then
@@ -41,27 +40,27 @@ fi
 
 
 # downloading and extracting the installer
-cd $TEMP
+cd "$TEMP"
 
 wget "https://dl.appstreaming.autodesk.com/production/installers/Fusion%20360%20Client%20Downloader.exe" > /dev/null 2>&1
 7z x "Fusion 360 Client Downloader.exe" > /dev/null 2>&1
 
 # extracting python35.zip to gain access to platform.pyc
-cd $TEMP_PYTHON
+cd "$TEMP_PYTHON"
 unzip $TEMP/python35.zip > /dev/null 2>&1
 
-cd $TEMP_PYTHON
+cd "$TEMP_PYTHON"
 uncompyle6 platform.pyc > $TEMP/platform.py
 
 # patching platform.py
-cd $TEMP
+cd "$TEMP"
 sed -i '/maj, min, build = /c\    maj, min, build = winver[:3]' platform.py
 sed -i "/return uname().system/c\    return 'Windows'" platform.py
 sed -i "/return uname().release/c\    return '7'" platform.py
 sed -i "/return uname().version/c\    return '6.1.7601'" platform.py
 
 # cleanup
-rm -rf $PYTHON_TEMP
+rm -rf "$PYTHON_TEMP"
 
 # finished
 echo $TEMP
