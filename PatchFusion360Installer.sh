@@ -21,13 +21,13 @@ if [ -z "$(which uncompyle6)" ]
 then
     echo Cannot find uncompyle6
     echo You may install it with:
-    echo wget https://files.pythonhosted.org/packages/67/32/18a25efd215b91cc0247732ed82131f84a9b0b033d9ad6c8f6d861a7e82c/uncompyle6-3.2.5.tar.gz
     echo cd /opt/
+    echo wget https://files.pythonhosted.org/packages/67/32/18a25efd215b91cc0247732ed82131f84a9b0b033d9ad6c8f6d861a7e82c/uncompyle6-3.2.5.tar.gz
     echo tar xvfz uncompyle6-3.2.5.tar.gz
     echo cd uncompyle6-3.2.5
     echo pip install -e .
     echo python setup.py install
-    echo export PATH="$PATH:/opt/uncompyle6-3.2.5/bin"
+    echo 'export PATH="$PATH:/opt/uncompyle6-3.2.5/bin"'
     exit 1
 fi
 
