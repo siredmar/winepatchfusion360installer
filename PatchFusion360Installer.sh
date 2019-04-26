@@ -44,10 +44,6 @@ fi
 cd $TEMP
 
 wget "https://dl.appstreaming.autodesk.com/production/installers/Fusion%20360%20Client%20Downloader.exe" > /dev/null 2>&1
-if [ "$2" ]
-then
-	echo Extracting file Fusion 360 Client Downloader.exe
-fi
 7z x "Fusion 360 Client Downloader.exe" > /dev/null 2>&1
 
 # extracting python35.zip to gain access to platform.pyc
@@ -64,22 +60,8 @@ sed -i "/return uname().system/c\    return 'Windows'" platform.py
 sed -i "/return uname().release/c\    return '7'" platform.py
 sed -i "/return uname().version/c\    return '6.1.7601'" platform.py
 
-if [ "$2" ]
-then
-	echo Patched lines are:
-	cat platform.py | grep "maj, min, build ="
-	cat platform.py | grep "return 'Windows'"
-	cat platform.py | grep "return '7'"
-	cat platform.py | grep "return '6.1.7601'"
-fi
-
 # cleanup
 rm -rf $PYTHON_TEMP
 
 # finished
-if [ -z "$2" ]
-then
-	echo $TEMP
-else
-	echo Please run 'wine streamer.exe' from $TEMP
-fi
+echo $TEMP
