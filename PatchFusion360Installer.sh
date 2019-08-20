@@ -1,6 +1,10 @@
 #!/bin/bash
 # This script downloads the Fusion360 Installer and patches it to be able to install it with wine
-# Armin Schlegel <armin.schlegel@gmx.de>, 06.03.2019
+# Armin Schlegel <armin.schlegel@gmx.de>, 20.08.2019
+#
+# usage: 	./PatchFusion360Installer.sh <target-directory-from-cwd> <verbose>
+# example:  ./PatchFusion360Installer.sh install_files 
+# example:  ./PatchFusion360Installer.sh tmp 1
 
 scriptdir="$(dirname $(readlink -f $0))"
 
@@ -14,8 +18,6 @@ TEMP_PATH+="/tmp/fusion360/"
 mkdir -p $TEMP_PATH | true
 cd $TEMP_PATH
 TEMP=$(mktemp -d -p $TEMP_PATH)
-TEMP_PYTHON=$(mktemp -d -p $TEMP_PATH)
-chmod -R 755 $TEMP_PYTHON
 chmod -R 755 $TEMP
 
 if [ -z "$(which 7z)" ]
@@ -37,15 +39,9 @@ then
 fi
 7z x "Fusion 360 Client Downloader.exe" > /dev/null 2>&1
 
-# extracting python35.zip to gain access to platform.pyc
-cd $TEMP_PYTHON
-unzip $TEMP/python35.zip > /dev/null 2>&1
-
-cd $TEMP_PYTHON
-cp "${scriptdir}/platform.py" "${TEMP}/platform.py"
-
 # patching platform.py
 cd $TEMP
+wget "https://raw.githubusercontent.com/python/cpython/master/Lib/platform.py" > /dev/null 2>&1
 sed -i '/maj, min, build = /c\    maj, min, build = winver[:3]' platform.py
 sed -i "/return uname().system/c\    return 'Windows'" platform.py
 sed -i "/return uname().release/c\    return '7'" platform.py
@@ -59,9 +55,6 @@ then
 	cat platform.py | grep "return '7'"
 	cat platform.py | grep "return '6.1.7601'"
 fi
-
-# cleanup
-rm -rf $PYTHON_TEMP
 
 # finished
 if [ -z "$2" ]
