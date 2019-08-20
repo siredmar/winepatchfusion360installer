@@ -24,32 +24,29 @@ Disable the d3d11 library completely:
 $ winetricks d3d11=disabled
 ```
 
-**Uage:**
+**Usage:**
 
-Just run the script.
+You can choose optional the target directory within the current working directory and make the output a little bit verbose.
+`$ ./PatchFusion360Installer.sh <target-directory-from-cwd> <verbose>`
 
+Example:
 ```
 $ git clone https://github.com/siredmar/winepatchfusion360installer.git
 $ cd winepatchfusion360installer
-$ ./PatchFusion360Installer.sh
---2019-03-06 08:07:23--  https://dl.appstreaming.autodesk.com/production/installers/Fusion%20360%20Client%20Downloader.exe
-Resolving dl.appstreaming.autodesk.com (dl.appstreaming.autodesk.com)... 23.38.41.109
-Connecting to dl.appstreaming.autodesk.com (dl.appstreaming.autodesk.com)|23.38.41.109|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 11595800 (11M) [application/octet-stream]
-Saving to: ‘Fusion 360 Client Downloader.exe’
-
-Fusion 360 Client Downloader.exe     100%[=====================================================================>]  11,06M  9,67MB/s    in 1,1s    
-
-2019-03-06 08:07:24 (9,67 MB/s) - ‘Fusion 360 Client Downloader.exe’ saved [11595800/11595800]
-
+$ ./PatchFusion360Installer.sh install_files 1 
 Extracting file Fusion 360 Client Downloader.exe
 Patched lines are:
     maj, min, build = winver[:3]
     return 'Windows'
     return '7'
     return '6.1.7601'
-Please run wine streamer.exe from /home/user/tmp/fusion360/tmp.CjNLGUqWQK
+Please run wine streamer.exe from /home/user/winepatchfusion360installer/install_files/tmp/fusion360/tmp.zguMnw00e1
 ```
 
 You are now able to execute the patched installer from the output directory. Note: You have to manually clean up this temporary directory.
+
+After starting streamer.exe with wine you may look at the installers log files to verify that installation is going on by e.g. 
+```
+$ tail -f ~/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Autodesk/autodesk.webdeploy.streamer.log
+```
+
