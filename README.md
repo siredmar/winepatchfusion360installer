@@ -2,8 +2,9 @@
 Contains a script that makes the Fusion 360 installer install in Linux using wine
 This is based on the information from: https://appdb.winehq.org/objectManager.php?sClass=version&iId=36468&iTestingId=104527
 
-The script downloads the installer and patches the platform.py file.
-Note: This file patches only the installer. None of the application itself is being altered with. 
+The script downloads the installer and uses a correct version of platform.py for the installation process.
+
+**Note: This file does not modify any parts of the application itself.**
 
 **Preparations:**
 Install 64 Bit Version of Wine. I tested it with Wine 4.3.
@@ -50,3 +51,6 @@ After starting streamer.exe with wine you may look at the installers log files t
 $ tail -f ~/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Autodesk/autodesk.webdeploy.streamer.log
 ```
 
+**Notes:**
+If you don't see the graphic canvas in Fusion 360 you might change Direct3D to version 9.
+Fusion 360's Preferences -> General -> Graphics driver and set it to DirectX 9 explicitly (instead of the default 'Auto-select')
