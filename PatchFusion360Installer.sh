@@ -28,6 +28,13 @@ then
     exit 1
 fi
 
+if [ -z "$(which wget)" ]
+then
+    echo Cannot find wget
+    echo You may install it with:
+    echo sudo apt install wget
+    exit 1
+fi
 
 # downloading and extracting the installer
 cd $TEMP
