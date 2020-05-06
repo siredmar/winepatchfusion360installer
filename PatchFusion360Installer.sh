@@ -48,7 +48,7 @@ fi
 
 # patching platform.py
 cd $TEMP
-wget "https://raw.githubusercontent.com/python/cpython/master/Lib/platform.py" > /dev/null 2>&1
+wget "https://raw.githubusercontent.com/python/cpython/3.7/Lib/platform.py" > /dev/null 2>&1
 sed -i '/maj, min, build = /c\    maj, min, build = winver[:3]' platform.py
 sed -i "/return uname().system/c\    return 'Windows'" platform.py
 sed -i "/return uname().release/c\    return '7'" platform.py
