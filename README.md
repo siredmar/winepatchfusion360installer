@@ -1,3 +1,5 @@
+**Use https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/wiki instead**
+
 # winepatchfusion360installer
 Contains a script that makes the Fusion 360 installer install in Linux using wine
 This is based on the information from: https://appdb.winehq.org/objectManager.php?sClass=version&iId=36468&iTestingId=104527
